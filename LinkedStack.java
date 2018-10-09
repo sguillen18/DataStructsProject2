@@ -33,12 +33,15 @@ public  class LinkedStack <T> implements StackInterface <T>{
 	
 	public LinkedStack() {
 		topNode = null;
+		lastNode = null;
 	}
 	
 	@Override
 	public void push(T item) {
-		//checkInitialization();
 		Node newNode = new Node(item);
+		if(isEmpty()) {
+			lastNode = newNode;
+		}
 		newNode.setNext(topNode);
 		topNode = newNode;
 	}
@@ -58,13 +61,13 @@ public  class LinkedStack <T> implements StackInterface <T>{
 			throw new EmptyStackException();
 		}
 		T outData = topNode.getData();
-		//topNode = topNode.getNext();
+		topNode = topNode.getNext();
 		return outData;
 	}
 	
 	private void checkInitialization() {
 		//is this how we check initialization? based on LinkedStack's constructor
-		if(!(topNode == null)) {
+		if(topNode == null) {
 			throw new EmptyStackException();
 		}
 	}
