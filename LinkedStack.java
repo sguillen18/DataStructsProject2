@@ -14,6 +14,11 @@ public  class LinkedStack <T> implements StackInterface <T>{
 			next = null;
 		}
 		
+		public Node (T data, Node n) {
+			this.data = data;
+			this.next = n;
+		}
+		
 		public T getData() {
 			return data;
 		}
@@ -27,7 +32,7 @@ public  class LinkedStack <T> implements StackInterface <T>{
 		}
 		
 		public void setNext(Node n) {
-			n = next;
+			next = n;
 		}
 	}
 	
@@ -39,7 +44,7 @@ public  class LinkedStack <T> implements StackInterface <T>{
 	@Override
 	public void push(T item) {
 		Node newNode = new Node(item);
-		if(isEmpty()) {
+		if (isEmpty()) {
 			lastNode = newNode;
 		}
 		newNode.setNext(topNode);
