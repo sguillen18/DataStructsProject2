@@ -23,10 +23,18 @@ public class Test {
 		
 		LispInput lispTest = new LispInput(input);
 		
+		/*Lisp l = new Lisp();
+		l.getAddStack().push(2.0);
+		l.getAddStack().push(1.0);
+		
+		System.out.println(l.addition());*/
+		
+		//LATER ADD IF 0 THEN NOT BALANCE
+		System.out.println(lispTest.convertDouble());
+		
 		
 		sc.close();
 		
 
 	}
-
 }
