@@ -1,7 +1,6 @@
 
 public class Test {
 
-
 	public static void main(String[] args) {
 		
 		
@@ -16,6 +15,12 @@ public class Test {
 		//it pops the 10? i think? but then doesn't make the 5 the topnode
 		System.out.println(p.pop());
 		System.out.println(p.peek());
+		
+		/*Expected output
+		 * 10
+		 * 10
+		 * 5
+		 */
 
 	}
 
