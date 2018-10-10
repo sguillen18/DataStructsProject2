@@ -29,40 +29,12 @@ public class Lisp {
 		return stackDiv;
 	}
 	
-	
-	public LinkedStack <Double> copy(LinkedStack <Double> stack) {
-		LinkedStack <Double> copyBackwards = new LinkedStack <Double>();
-		LinkedStack <Double> copyForwards = new LinkedStack <Double>();
-		while(!stack.isEmpty()) {
-			double item = stack.pop();
-			copyBackwards.push(item);
-		}
-		
-		while(!stack.isEmpty()) {
-			double item = copyBackwards.pop();
-			copyForwards.push(item);
-		}
-		
-		stack = copyForwards;
-		
-		return copyForwards;
-		
-	}
-	
 	public LinkedStack <Double> copyBackwards(LinkedStack <Double> stack) {
 		LinkedStack <Double> copyBackwards = new LinkedStack <Double>();
-		LinkedStack <Double> copyForwards = new LinkedStack <Double>();
 		while(!stack.isEmpty()) {
 			double item = stack.pop();
 			copyBackwards.push(item);
 		}
-		
-		while(!stack.isEmpty()) {
-			double item = copyBackwards.pop();
-			copyForwards.push(item);
-		}
-		
-		stack = copyForwards;
 		
 		return copyBackwards;
 		
@@ -74,9 +46,8 @@ public class Lisp {
 		}
 		else {
 			double sum = 0;
-			LinkedStack<Double> stack2 = copy(stackAdd);
-			while(!stack2.isEmpty()) {
-				sum += stack2.pop();
+			while(!stackAdd.isEmpty()) {
+				sum += stackAdd.pop();
 			}
 			return sum;
 		}
@@ -93,18 +64,39 @@ public class Lisp {
 			while(!stack2.isEmpty()) {
 				sub -= stack2.pop();
 			}
+			stackSub.clear();
 			return sub;
 		}
 		return 0;
 	}
 
 	public double multiplication() {
-		return 0;
+		if(stackMult.isEmpty()) {
+			return 1;
+		}
+		else {
+			double product = 0;
+			while(!stackMult.isEmpty()) {
+				product *= stackMult.pop();
+			}
+			return product;
+		}
 	}
 
 	public double division() {
 		double div = 0;
 		LinkedStack<Double> stack2 = copyBackwards(stackSub);
+		if(stackSub.getSize() == 1) {
+			return 1;
+		}
+		else if (stackSub.getSize() > 1) {
+			div = stack2.pop();
+			while(!stack2.isEmpty()) {
+				div /= stack2.pop();
+			}
+			stackDiv.clear();
+			return div;
+		}
 		return 0;
 	}
 
