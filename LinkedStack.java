@@ -4,6 +4,7 @@ public  class LinkedStack <T> implements StackInterface <T>{
 	
 	private Node topNode;
 	private Node lastNode;
+	private int size;
 	
 	private class Node{
 		T data;
@@ -12,11 +13,6 @@ public  class LinkedStack <T> implements StackInterface <T>{
 		public Node (T data) {
 			this.data = data;
 			next = null;
-		}
-		
-		public Node (T data, Node n) {
-			this.data = data;
-			this.next = n;
 		}
 		
 		public T getData() {
@@ -39,6 +35,11 @@ public  class LinkedStack <T> implements StackInterface <T>{
 	public LinkedStack() {
 		topNode = null;
 		lastNode = null;
+		size = 0;
+	}
+	
+	public int getSize() {
+		return size;
 	}
 	
 	@Override
@@ -49,6 +50,7 @@ public  class LinkedStack <T> implements StackInterface <T>{
 		}
 		newNode.setNext(topNode);
 		topNode = newNode;
+		size++;
 	}
 	
 	public boolean isEmpty() {
@@ -57,6 +59,7 @@ public  class LinkedStack <T> implements StackInterface <T>{
 	
 	public void clear() {
 		topNode = null;
+		size = 0;
 	}
 	
 	@Override
@@ -67,14 +70,8 @@ public  class LinkedStack <T> implements StackInterface <T>{
 		}
 		T outData = topNode.getData();
 		topNode = topNode.getNext();
+		size--;
 		return outData;
-	}
-	
-	private void checkInitialization() {
-		//is this how we check initialization? based on LinkedStack's constructor
-		if(topNode == null) {
-			throw new EmptyStackException();
-		}
 	}
 
 
