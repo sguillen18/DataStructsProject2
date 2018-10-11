@@ -6,7 +6,7 @@ public class Test {
 	public static void main(String[] args) {
 		
 		
-		LinkedStack<String> p = new LinkedStack<String>();
+		//LinkedStack<String> p = new LinkedStack<String>();
 
 		
 		/*String test = "5";
@@ -30,7 +30,7 @@ public class Test {
 		System.out.println(l.addition());*/
 		
 		if(lispTest.checkBalance(input)) {
-			System.out.println(lispTest.convertDouble());
+			System.out.println(lispTest.lisp());
 		}
 		else {
 			System.out.println("Could not run because expression was not balanced. Please run again.");

@@ -178,7 +178,7 @@ public class LispInput {
 		return ans;
 	}
 	
-	public double convertDouble() {
+	public double lisp() {
 		return analyze(charArray, 0);
 	}
 	
