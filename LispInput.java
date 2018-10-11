@@ -5,13 +5,14 @@ public class LispInput {
 	private Lisp l;
 	private String input;
 	private int spot;
+	private int spotStop;
 	private char[] charArray;
 	
 	public LispInput(String i) {
 		charArray = i.toCharArray();
 		input = i;
 		l = new Lisp();
-		spot = 0;
+		spotStop = 0;
 	}
 	
 	public LispInput() {
@@ -57,10 +58,11 @@ public class LispInput {
                 first == '{' && second == '}');
     }
 	
-	public double analyze() {
+	public double analyze(char[] c, int i) {
+		charArray = c;
+		spot = i;
 		double ans = 0;
-		if(checkBalance(input)) {
-			spot++;
+		while(checkBalance(input) && spot < charArray.length) {
 			switch(charArray[spot]) {
 			case ' ':
 				break;
@@ -72,7 +74,11 @@ public class LispInput {
 					}
 					else if (charArray[spot] == '(') {
 						spot++;
-						(l.getAddStack()).push(analyze());
+						LispInput newLisp = new LispInput(input);
+						double subAns = newLisp.analyze(charArray, spot);
+						spot = newLisp.getSpotStop();
+						(l.getAddStack()).push(subAns);
+						break;
 					} 
 					else {
 						double num = (double) (charArray[spot] - '0');
@@ -81,6 +87,7 @@ public class LispInput {
 					}
 				}
 				spot++;
+				spotStop = spot;
 				ans = l.addition();
 				break;
 			case '-':
@@ -91,7 +98,10 @@ public class LispInput {
 					}
 					else if (charArray[spot] == '(') {
 						spot++;
-						(l.getSubStack()).push(analyze());
+						LispInput newLisp = new LispInput(input);
+						double subAns = newLisp.analyze(charArray, spot);
+						spot = newLisp.getSpotStop();
+						(l.getSubStack()).push(subAns);
 					} else {
 						double num = (double) (charArray[spot] - '0');
 						(l.getSubStack()).push(num);
@@ -99,6 +109,7 @@ public class LispInput {
 					}
 				}
 				spot++;
+				spotStop = spot;
 				ans = l.subtraction();
 				break;
 				
@@ -110,7 +121,10 @@ public class LispInput {
 					}
 					else if (charArray[spot] == '(') {
 						spot++;
-						(l.getMultStack()).push(analyze());
+						LispInput newLisp = new LispInput(input);
+						double subAns = newLisp.analyze(charArray, spot);
+						spot = newLisp.getSpotStop();
+						(l.getMultStack()).push(subAns);
 					} else {
 						double num = (double) (charArray[spot] - '0');
 						(l.getMultStack()).push(num);
@@ -118,6 +132,7 @@ public class LispInput {
 					}
 				}
 				spot++;
+				spotStop = spot;
 				ans = l.multiplication();
 				break;
 			case '/':
@@ -128,7 +143,10 @@ public class LispInput {
 					}
 					else if (charArray[spot] == '(') {
 						spot++;
-						(l.getDivStack()).push(analyze());
+						LispInput newLisp = new LispInput(input);
+						double subAns = newLisp.analyze(charArray, spot);
+						spot = newLisp.getSpotStop();
+						(l.getDivStack()).push(subAns);
 					} else {
 						double num = (double) (charArray[spot] - '0');
 						(l.getDivStack()).push(num);
@@ -136,9 +154,11 @@ public class LispInput {
 					}
 				}
 				spot++;
+				spotStop = spot;
 				ans = l.division();
 				break;
 			default:
+				spot++;
 				break;
 			}
 		}
@@ -149,7 +169,11 @@ public class LispInput {
 	}
 	
 	public int convertDouble() {
-		return (int) analyze();
+		return (int) analyze(charArray, 0);
+	}
+	
+	public int getSpotStop() {
+		return spotStop;
 	}
 
 }
