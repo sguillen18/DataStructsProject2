@@ -9,13 +9,13 @@ public class Test {
 		LinkedStack<String> p = new LinkedStack<String>();
 
 		
-		String test = "5";
+		/*String test = "5";
 		String test2 = "10";
 		p.push(test);
 		p.push(test2);
 		System.out.println(p.peek());
 		System.out.println(p.pop());
-		System.out.println(p.peek());
+		System.out.println(p.peek());*/
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter a valid Lisp expression.");
@@ -29,9 +29,12 @@ public class Test {
 		
 		System.out.println(l.addition());*/
 		
-		//LATER ADD IF 0 THEN NOT BALANCE
-		System.out.println(lispTest.convertDouble());
-		
+		if(lispTest.checkBalance(input)) {
+			System.out.println(lispTest.convertDouble());
+		}
+		else {
+			System.out.println("Could not run because expression was not balanced. Please run again.");
+		}
 		
 		sc.close();
 		
