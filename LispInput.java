@@ -65,35 +65,78 @@ public class LispInput {
 			case ' ':
 				break;
 			case '+':
+				spot++;
 				while (!(charArray[spot] == ')')){
 					if(charArray[spot] == ' ') {
 						spot++;
-						break;
 					}
 					else if (charArray[spot] == '(') {
 						spot++;
-						l.getAddStack().push(analyze());
-						break;
-					}
+						(l.getAddStack()).push(analyze());
+					} 
 					else {
-						double num =(double) charArray[spot];
-						l.getAddStack().push(num);
+						double num = (double) (charArray[spot] - '0');
+						(l.getAddStack()).push(num);
 						spot++;
-						break;
 					}
 				}
 				spot++;
 				ans = l.addition();
 				break;
 			case '-':
+				spot++;
+				while (!(charArray[spot] == ')')){
+					if(charArray[spot] == ' ') {
+						spot++;
+					}
+					else if (charArray[spot] == '(') {
+						spot++;
+						(l.getSubStack()).push(analyze());
+					} else {
+						double num = (double) (charArray[spot] - '0');
+						(l.getSubStack()).push(num);
+						spot++;
+					}
+				}
+				spot++;
+				ans = l.subtraction();
+				break;
 				
 			case '*':
-			
-			case '/':
-				
-			case '(':
 				spot++;
-				//ans = analyze();
+				while (!(charArray[spot] == ')')){
+					if(charArray[spot] == ' ') {
+						spot++;
+					}
+					else if (charArray[spot] == '(') {
+						spot++;
+						(l.getMultStack()).push(analyze());
+					} else {
+						double num = (double) (charArray[spot] - '0');
+						(l.getMultStack()).push(num);
+						spot++;
+					}
+				}
+				spot++;
+				ans = l.multiplication();
+				break;
+			case '/':
+				spot++;
+				while (!(charArray[spot] == ')')){
+					if(charArray[spot] == ' ') {
+						spot++;
+					}
+					else if (charArray[spot] == '(') {
+						spot++;
+						(l.getDivStack()).push(analyze());
+					} else {
+						double num = (double) (charArray[spot] - '0');
+						(l.getDivStack()).push(num);
+						spot++;
+					}
+				}
+				spot++;
+				ans = l.division();
 				break;
 			default:
 				break;

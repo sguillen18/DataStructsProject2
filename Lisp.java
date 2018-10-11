@@ -56,18 +56,17 @@ public class Lisp {
 	public double subtraction() {
 		double sub = 0;
 		LinkedStack<Double> stack2 = copyBackwards(stackSub);
-		if(stackSub.getSize() == 1) {
+		if(stack2.getSize() == 1) {
 			return 0 - stack2.pop();
 		}
-		else if (stackSub.getSize() > 1) {
+		else if (stack2.getSize() > 1) {
 			sub = stack2.pop();
 			while(!stack2.isEmpty()) {
 				sub -= stack2.pop();
 			}
 			stackSub.clear();
-			return sub;
 		}
-		return 0;
+		return sub;
 	}
 
 	public double multiplication() {
@@ -75,7 +74,7 @@ public class Lisp {
 			return 1;
 		}
 		else {
-			double product = 0;
+			double product = 1;
 			while(!stackMult.isEmpty()) {
 				product *= stackMult.pop();
 			}
@@ -84,20 +83,19 @@ public class Lisp {
 	}
 
 	public double division() {
-		double div = 0;
-		LinkedStack<Double> stack2 = copyBackwards(stackSub);
-		if(stackSub.getSize() == 1) {
-			return 1;
+		double div = 1;
+		LinkedStack<Double> stack2 = copyBackwards(stackDiv);
+		if(stack2.getSize() == 1) {
+			return div;
 		}
-		else if (stackSub.getSize() > 1) {
+		else if (stack2.getSize() > 1) {
 			div = stack2.pop();
 			while(!stack2.isEmpty()) {
 				div /= stack2.pop();
 			}
 			stackDiv.clear();
-			return div;
 		}
-		return 0;
+		return div;
 	}
 
 }
